@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Profile: Debjani - Data Annotator</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Roboto', sans-serif; background-color: #F8FAFC; }
+        
+        /* Chart Container Utilities */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        /* Timeline Utilities */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background-color: #E2E8F0;
+            z-index: 0;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+    <!-- 
+        Palette Used: Electric Future
+        Primary Blue: #2563EB
+        Accent Green: #00E676
+        Accent Purple: #7C3AED
+        Text Dark: #1E293B
+        Background: #F8FAFC
+        
+        NO SVG USED.
+        NO MERMAID JS USED.
+    -->
+    <!-- 
+        Source Material Analysis:
+        Subject: Debjani, Data Annotator/Linguistic Specialist.
+        Key Themes: AI Training, Linguistic Accuracy, Technical Proficiency (R/SQL), Guideline Adherence.
+        Structure: Hero -> Skills Radar -> Experience Timeline -> Project Donut -> Tools Bar -> Qualities.
+    -->
+    <!--
+        Chart Selection Justification:
+        1. Skills Matrix -> Radar Chart -> Best for comparing multivariate data (skill categories) to show a balanced profile.
+        2. Project Breakdown -> Donut Chart -> Efficiently shows the part-to-whole relationship of project types.
+        3. Tool Proficiency -> Horizontal Bar Chart -> Clear comparison of tool familiarity, easy to read labels.
+        4. Experience -> HTML Timeline -> Best for chronological text data (Time/Change).
+    -->
+</head>
+<body class="text-slate-800">
+
+    <!-- Navigation / Header -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="font-bold text-2xl text-blue-600 tracking-tight">Debjani <span class="text-slate-400 font-light">| Visual Profile</span></div>
+            <div class="text-sm font-medium text-slate-500 hidden md:block">Data Annotation • Linguistic QA • AI Training</div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- Section 1: Hero & Introduction -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+            <div class="md:col-span-2 space-y-4">
+                <div class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-2">Open to Work</div>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight">
+                    Refining the Future of <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-500">Generative AI</span>
+                </h1>
+                <p class="text-lg text-slate-600 leading-relaxed">
+                    Highly proficient <strong>Data Annotator & Linguistic Quality Specialist</strong>. I bridge the gap between raw data and intelligent models through rigorous guideline interpretation, prompt engineering, and semantic accuracy reviews.
+                </p>
+                <div class="flex flex-wrap gap-3 mt-4">
+                    <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-md text-sm border border-slate-200">LLM Training</span>
+                    <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-md text-sm border border-slate-200">Prompt Engineering</span>
+                    <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-md text-sm border border-slate-200">SQL & R</span>
+                    <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-md text-sm border border-slate-200">Remote/Freelance</span>
+                </div>
+            </div>
+            <div class="bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl p-6 text-white shadow-xl flex flex-col justify-center items-center text-center h-full min-h-[250px]">
+                <div class="text-6xl mb-4">🎯</div>
+                <div class="text-2xl font-bold">Accuracy Focused</div>
+                <div class="text-blue-100 mt-2">Specializing in cultural nuance and semantic precision.</div>
+            </div>
+        </section>
+
+        <!-- Section 2: Core Competencies (Radar Chart) -->
+        <section class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-800 border-l-4 border-blue-600 pl-3">Competency Matrix</h2>
+                <p class="text-slate-600 mt-2">
+                    A holistic view of my professional skillset, balancing linguistic precision with technical capability. This visualization highlights my strength in <strong>Guideline Interpretation</strong> and <strong>Linguistic QA</strong>—critical for high-quality LLM training.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <!-- Chart -->
+                <div class="chart-container">
+                    <canvas id="skillsRadarChart"></canvas>
+                </div>
+                <!-- Description/Context -->
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="bg-green-100 p-2 rounded-lg text-green-700 mt-1">📝</div>
+                        <div>
+                            <h3 class="font-bold text-lg">Linguistic Precision</h3>
+                            <p class="text-sm text-slate-600">Expertise in text evaluation, prompt writing, and identifying subtle cultural nuances that machines often miss.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="bg-blue-100 p-2 rounded-lg text-blue-700 mt-1">⚙️</div>
+                        <div>
+                            <h3 class="font-bold text-lg">Technical Edge</h3>
+                            <p class="text-sm text-slate-600">Unlike many annotators, I leverage <strong>R and SQL</strong> for data cleaning, querying, and verifying dataset integrity.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="bg-purple-100 p-2 rounded-lg text-purple-700 mt-1">⚖️</div>
+                        <div>
+                            <h3 class="font-bold text-lg">Process Discipline</h3>
+                            <p class="text-sm text-slate-600">Unwavering adherence to complex project guidelines ensures consistent, high-quality training data.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Professional Journey (Timeline) -->
+        <section>
+            <h2 class="text-2xl font-bold text-slate-800 border-l-4 border-blue-600 pl-3 mb-8">Professional Journey</h2>
+            <p class="text-slate-600 mb-8">My career path demonstrates a consistent focus on accuracy and content quality, evolving from educational content creation to specialized AI data annotation.</p>
+            
+            <div class="relative max-w-4xl mx-auto py-4">
+                <div class="timeline-line hidden md:block"></div>
+                
+                <!-- Item 1 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 relative">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500 z-10 md:text-right">
+                        <h3 class="font-bold text-xl text-slate-800">Data Annotator</h3>
+                        <div class="text-blue-600 font-medium">Telus Digital (Freelancer)</div>
+                        <div class="text-sm text-slate-400 mb-3">2023 - Present</div>
+                        <p class="text-slate-600 text-sm">Executed structured annotation across 3 AI projects. Managed high-volume tasks with strict turnaround times, ensuring contextually relevant annotations for model consumption.</p>
+                    </div>
+                    <div class="hidden md:flex justify-start items-center pl-8">
+                        <span class="text-4xl">🤖</span>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 relative">
+                    <div class="hidden md:flex justify-end items-center pr-8">
+                        <span class="text-4xl">🧠</span>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-purple-500 z-10">
+                        <h3 class="font-bold text-xl text-slate-800">Annotator & Prompt Writer</h3>
+                        <div class="text-purple-600 font-medium">Mindtel</div>
+                        <div class="text-sm text-slate-400 mb-3">2023 - Present</div>
+                        <p class="text-slate-600 text-sm">Specialized in text-based economic concepts. Wrote clear, context-aware prompts and refined AI-generated content to match linguistic style standards.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-500 z-10 md:text-right">
+                        <h3 class="font-bold text-xl text-slate-800">Content Writer / Alt Text</h3>
+                        <div class="text-green-600 font-medium">Freelance</div>
+                        <div class="text-sm text-slate-400 mb-3">2021 - Present</div>
+                        <p class="text-slate-600 text-sm">Produced descriptive alt text for academic visuals. Adapted complex content into simple explanations, reinforcing strong communication skills.</p>
+                    </div>
+                    <div class="hidden md:flex justify-start items-center pl-8">
+                        <span class="text-4xl">✍️</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Experience Composition (Grid with Charts) -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Project Distribution -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-slate-800 mb-4">Project Focus Distribution</h3>
+                <p class="text-sm text-slate-600 mb-4">
+                    Based on my project history, this breakdown illustrates the variety of data types I handle. I have significant experience in both <strong>Text Evaluation</strong> (Logic/Grammar) and <strong>Structured Prompting</strong>.
+                </p>
+                <div class="chart-container" style="height: 300px;">
+                    <canvas id="projectDonutChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Tool Proficiency -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-slate-800 mb-4">Tool Proficiency</h3>
+                <p class="text-sm text-slate-600 mb-4">
+                    My toolkit extends beyond basic annotation interfaces. I utilize <strong>SQL</strong> and <strong>R</strong> for data management, alongside industry-standard annotation tools like <strong>CVAT</strong> and <strong>LabelImg</strong>.
+                </p>
+                <div class="chart-container" style="height: 300px;">
+                    <canvas id="toolsBarChart"></canvas>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Section 5: Key Qualities (Cards) -->
+        <section class="bg-slate-800 rounded-2xl p-8 text-white">
+            <h2 class="text-2xl font-bold mb-6 text-center">Why I Am The Right Fit</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bg-slate-700 p-4 rounded-lg text-center hover:bg-slate-600 transition">
+                    <div class="text-3xl mb-2">👁️</div>
+                    <h4 class="font-bold mb-1">Detail Oriented</h4>
+                    <p class="text-xs text-slate-300">Consistent accuracy across high-volume workloads.</p>
+                </div>
+                <div class="bg-slate-700 p-4 rounded-lg text-center hover:bg-slate-600 transition">
+                    <div class="text-3xl mb-2">📚</div>
+                    <h4 class="font-bold mb-1">Guideline Expert</h4>
+                    <p class="text-xs text-slate-300">Strict adherence to complex project-specific rules.</p>
+                </div>
+                <div class="bg-slate-700 p-4 rounded-lg text-center hover:bg-slate-600 transition">
+                    <div class="text-3xl mb-2">🗣️</div>
+                    <h4 class="font-bold mb-1">Linguistic Quality</h4>
+                    <p class="text-xs text-slate-300">Grammatical, semantic, and contextual verification.</p>
+                </div>
+                <div class="bg-slate-700 p-4 rounded-lg text-center hover:bg-slate-600 transition">
+                    <div class="text-3xl mb-2">⏱️</div>
+                    <h4 class="font-bold mb-1">Reliable</h4>
+                    <p class="text-xs text-slate-300">Professional discipline for meeting strict deadlines.</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="text-center text-slate-400 text-sm mt-8 pb-4">
+            <p>Generated Interactive Profile based on Resume of Debjani</p>
+        </footer>
+
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // -------------------------------------------------------
+        // Helper: Label Wrapping Logic (Strictly > 16 chars)
+        // -------------------------------------------------------
+        function wrapLabel(label) {
+            const MAX_LENGTH = 16;
+            if (label.length <= MAX_LENGTH) return label;
+            
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + " " + words[i]).length <= MAX_LENGTH) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // -------------------------------------------------------
+        // Shared Chart Configuration
+        // -------------------------------------------------------
+        Chart.defaults.font.family = "'Roboto', sans-serif";
+        Chart.defaults.color = '#475569';
+        
+        const commonTooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // -------------------------------------------------------
+        // Chart 1: Skills Radar Chart
+        // -------------------------------------------------------
+        const skillsLabelsRaw = [
+            "Linguistic Accuracy", 
+            "Guideline Adherence", 
+            "Prompt Engineering", 
+            "Technical (SQL/R)", 
+            "Data Annotation", 
+            "Communication"
+        ];
+        const skillsLabels = skillsLabelsRaw.map(wrapLabel);
+
+        const ctxRadar = document.getElementById('skillsRadarChart').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: skillsLabels,
+                datasets: [{
+                    label: 'Proficiency Level (0-100)',
+                    data: [90, 95, 85, 75, 95, 85], // Estimated based on "Strong", "Expert", etc.
+                    fill: true,
+                    backgroundColor: 'rgba(37, 99, 235, 0.2)', // Blue-600 low opacity
+                    borderColor: '#2563EB',
+                    pointBackgroundColor: '#2563EB',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#2563EB'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltipConfig
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: '#E2E8F0' },
+                        grid: { color: '#E2E8F0' },
+                        pointLabels: {
+                            font: { size: 12, weight: 'bold' },
+                            color: '#1E293B'
+                        },
+                        suggestedMin: 50,
+                        suggestedMax: 100
+                    }
+                }
+            }
+        });
+
+        // -------------------------------------------------------
+        // Chart 2: Project Breakdown (Donut)
+        // -------------------------------------------------------
+        // Data derived from resume: 3 Telus Projects, 2 Mindtel Projects, Continuous Freelance work.
+        // Categories: Image Annotation (Telus), Text Evaluation (Mindtel), Prompt Writing (Mindtel), Educational Content (Freelance)
+        
+        const projectLabelsRaw = ["Image Annotation", "Text Evaluation", "Prompt Writing", "Alt Text/Content"];
+        const projectLabels = projectLabelsRaw.map(wrapLabel);
+        
+        const ctxDonut = document.getElementById('projectDonutChart').getContext('2d');
+        new Chart(ctxDonut, {
+            type: 'doughnut',
+            data: {
+                labels: projectLabels,
+                datasets: [{
+                    data: [30, 25, 25, 20], // Illustrative distribution
+                    backgroundColor: [
+                        '#2563EB', // Blue
+                        '#00E676', // Green
+                        '#7C3AED', // Purple
+                        '#F59E0B'  // Amber
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { usePointStyle: true } },
+                    tooltip: commonTooltipConfig
+                },
+                cutout: '60%'
+            }
+        });
+
+        // -------------------------------------------------------
+        // Chart 3: Tools Proficiency (Horizontal Bar)
+        // -------------------------------------------------------
+        const toolLabelsRaw = ["SQL (Queries)", "R (Analysis)", "LabelImg", "CVAT", "Excel/Sheets", "JSON/CSV"];
+        const toolLabels = toolLabelsRaw.map(wrapLabel);
+
+        const ctxBar = document.getElementById('toolsBarChart').getContext('2d');
+        new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: toolLabels,
+                datasets: [{
+                    label: 'Proficiency',
+                    data: [70, 65, 85, 80, 90, 75],
+                    backgroundColor: '#00E676', // Vibrant Green
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y', // Horizontal bar
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltipConfig
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: { display: false }
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
